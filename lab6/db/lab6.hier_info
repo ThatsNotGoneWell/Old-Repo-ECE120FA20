@@ -1,0 +1,18 @@
+|lab6
+A <= inst5.DB_MAX_OUTPUT_PORT_TYPE
+reset => inst13.ACLR
+reset => inst10.ACLR
+reset => inst11.ACLR
+CLK => inst13.CLK
+CLK => inst10.CLK
+CLK => inst11.CLK
+T => inst13.DATAIN
+set => inst13.PRESET
+set => inst11.PRESET
+set => inst10.PRESET
+P <= inst6.DB_MAX_OUTPUT_PORT_TYPE
+S2 <= inst13.DB_MAX_OUTPUT_PORT_TYPE
+S1 <= inst10.DB_MAX_OUTPUT_PORT_TYPE
+S0 <= inst11.DB_MAX_OUTPUT_PORT_TYPE
+
+
