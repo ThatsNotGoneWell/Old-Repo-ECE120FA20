@@ -17,7 +17,6 @@
 ; R4 is used as a loop control
 ; R5 holds the sum of positive numbers
 
-00110001 00000000	; starting address is x3100
 
 0101 101 001 1 00000	; R5 <- 0		clear the current value
 0101 100 001 1 00000	; R4 <- 0		clear the current value
