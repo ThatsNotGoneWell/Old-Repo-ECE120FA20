@@ -1,9 +1,13 @@
 Question 1: Describe the errors that occur when trying to assemble lab11.asm. Identify the cause of each error.
-
+There were eight errors. The first two errors were resulted from the absence of .ORIG. Without it, the program won't be able to start. The third, fifth and seventh error were all caused by improper use of label. The old codes tried to use address to get the value, but it's the wrong way. All these places should be labeled before using them. The fourth error was caused by an extra comma. The sixth error was caused by the the wrong order of p and z behind BR. It should be the other way around. The last error was caused by the absence of .END. Otherwise the program won't end.
 
 
 Question 2: For each label in the code, write down the corresponding memory location. 
-
+x300E - INPUT
+x300F - ZERO
+x3010 - COMPONE
+x3011 - RESULT
 
 
 Question 3: Between using labels and explicit memory locations/offsets, which one makes the most sense, and why?
+Memory locations are way easier to use, so that makes more sense to me. I hope that it can be used for future assignment. By comparison, offset create more work for the coder to do, but I assume that it will reduce the load for the machine in a complicated calculation. Therefore, even though CPUs might use offset for itself, memory location is definitely more friendly for human.
