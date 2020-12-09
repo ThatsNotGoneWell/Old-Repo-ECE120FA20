@@ -1,7 +1,86 @@
-; The table below represents an 8x16 font.  For each 8-bit extended ASCII
-; character, the table uses 16 memory locations, each of which contains
-; 8 bits (the high 8 bits, for your convenience) marking pixels in the
-; line for that character.
+
+; This program takes input starting from x5000, takes first two
+; as font and the rest as symbols and print out stuff.
+; LOOP_ONE is used to find certain symbol and COLUMN is use to
+; print the certain column of the symbol.
+; NEXT_SYMBOL is used to loop to the next symbol after 
+; one column of a character is printed.
+; ROW is use to print the next row.
+; R0 is for printing. R1 is first used to get the ASCII code
+; in R4, then is used to store 8 for a loop.
+; R2 is used to store address of the data for the symbols.
+; R3 is used to store the content of address in R2.
+; R4 is used to store address for symbols.
+; R6 is used to store #16 and loop the columns.
+; R7 is left blank.
+
+            .ORIG x3000		      ; Program start at x3000
+            AND   R0,R0,#0            ; Initialize the register
+            AND   R1,R1,#0            ; Initialize the register
+            AND   R2,R2,#0            ; Initialize the register
+            AND   R3,R3,#0            ; Initialize the register
+            AND   R4,R4,#0            ; Initialize the register
+            AND   R5,R5,#0            ; Initialize the register
+            AND   R6,R6,#0            ; Initialize the register
+            AND   R7,R7,#0            ; Initialize the register
+            
+
+
+
+
+
+
+            ADD R6,R6,#8              ; Add #16 to R6
+            ADD R6,R6,#8              ;
+
+ROW         LD    R0,NEW_L            ; Go to the next line
+            OUT                       ;
+
+
+            LD    R4,SYMBOL           ; Load address of the symbol to be printed
+
+
+NEXT_SYMBOL LDR   R1,R4,#0            ;
+            LEA   R2,FONT_DATA        ; Load address of data
+
+LOOP_ONE    ADD   R2,R2,#8            ; Add #16 to R2
+            ADD   R2,R2,#8            ;
+            ADD   R1,R1,#-1           ;
+            BRp   LOOP_ONE            ;
+
+            ADD   R1,R1,#8            ;
+            ADD   R2,R2,R5            ; Make sure the program choose the correct row
+            LDR   R3,R2,#0            ; Load R2 into R3
+COLUMN      ADD   R3,R3,#0            ; 
+            BRn   PRINT_N             ; Jump to print positive
+            LDI   R0,SYMBOL_N,        ; Print SYMBOL_N
+            OUT                       ; Print SYMBOL_N
+            BRnzp JUMP                ; Jump after printing
+PRINT_N     LDI   R0,SYMBOL_Y,        ; Print SYMBOL_Y
+            OUT                       ; Print SYMBOL_Y
+JUMP        ADD   R3,R3,R3            ; Shift R2 by one bit
+            ADD   R1,R1,#-1           ;
+            BRp   COLUMN              ; Jump to next column
+
+            ADD   R4,R4,#1            ;
+            LDR   R1,R4,#0            ; Get the setcc to check whether it hit HALT
+            BRp   NEXT_SYMBOL         ;
+
+
+
+
+            ADD   R5,R5,#1            ; Move to next row for characters
+
+            ADD   R6,R6,#-1           ;
+            BRp   ROW                 ; Jump to next row
+ 
+
+BREAK_C     TRAP x25
+SYMBOL     .FILL x5002
+SYMBOL_N   .FILL x5000
+SYMBOL_Y   .FILL x5001
+NEW_L      .FILL x000A
+
 
 FONT_DATA
 	.FILL	x0000
@@ -4100,3 +4179,7 @@ FONT_DATA
 	.FILL	x0000
 	.FILL	x0000
 	.FILL	x0000
+        .END
+
+
+
