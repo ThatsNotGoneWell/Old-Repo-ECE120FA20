@@ -53,10 +53,10 @@ LOOP_ONE    ADD   R2,R2,#8            ; Add #16 to R2
             LDR   R3,R2,#0            ; Load R2 into R3
 COLUMN      ADD   R3,R3,#0            ; 
             BRn   PRINT_N             ; Jump to print positive
-            LDI   R0,SYMBOL_N,        ; Print SYMBOL_N
+            LDI   R0,SYMBOL_N         ; Print SYMBOL_N
             OUT                       ; Print SYMBOL_N
             BRnzp JUMP                ; Jump after printing
-PRINT_N     LDI   R0,SYMBOL_Y,        ; Print SYMBOL_Y
+PRINT_N     LDI   R0,SYMBOL_Y         ; Print SYMBOL_Y
             OUT                       ; Print SYMBOL_Y
 JUMP        ADD   R3,R3,R3            ; Shift R2 by one bit
             ADD   R1,R1,#-1           ;
