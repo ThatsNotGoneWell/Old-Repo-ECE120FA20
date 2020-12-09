@@ -33,11 +33,7 @@
             ADD R6,R6,#8              ; Add #16 to R6
             ADD R6,R6,#8              ;
 
-ROW         LD    R0,NEW_L            ; Go to the next line
-            OUT                       ;
-
-
-            LD    R4,SYMBOL           ; Load address of the symbol to be printed
+ROW         LD    R4,SYMBOL           ; Load address of the symbol to be printed
 
 
 NEXT_SYMBOL LDR   R1,R4,#0            ;
@@ -66,7 +62,8 @@ JUMP        ADD   R3,R3,R3            ; Shift R2 by one bit
             LDR   R1,R4,#0            ; Get the setcc to check whether it hit HALT
             BRp   NEXT_SYMBOL         ;
 
-
+            LD    R0,NEW_L            ; Go to the next line
+            OUT                       ;
 
 
             ADD   R5,R5,#1            ; Move to next row for characters
